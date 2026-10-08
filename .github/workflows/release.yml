@@ -1,0 +1,43 @@
+name: Release
+
+# Push a tag like v1.1.0 and this builds the Windows executables and publishes the GitHub release.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt pyinstaller pytest
+      - name: Run tests
+        run: python -m pytest -q tests
+      - name: Build DNScout.exe
+        run: python -m PyInstaller --noconfirm --clean --onefile --windowed --collect-data sv_ttk --name DNScout dn_scout.py
+      - name: Build AXLDiag.exe
+        run: python -m PyInstaller --noconfirm --clean --onefile --console --name AXLDiag axl_diag.py
+      - name: Package (example config only - no hosts, no credentials)
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force release | Out-Null
+          Copy-Item dist/DNScout.exe, dist/AXLDiag.exe, README.md, LICENSE, NOTICE, SECURITY.md, THIRD_PARTY_NOTICES.md, cucm_clusters.example.json release/
+          $zip = "DNScout-${{ github.ref_name }}-windows.zip"
+          Compress-Archive -Path release/* -DestinationPath $zip -Force
+          $hash = (Get-FileHash -Algorithm SHA256 $zip).Hash.ToLower()
+          "$hash  $zip" | Set-Content -Encoding ascii SHA256SUMS.txt
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: DN Scout ${{ github.ref_name }}
+          body_path: docs/releases/${{ github.ref_name }}.md
+          files: |
+            DNScout-${{ github.ref_name }}-windows.zip
+            SHA256SUMS.txt

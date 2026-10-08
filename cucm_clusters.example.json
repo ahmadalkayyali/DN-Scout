@@ -1,0 +1,32 @@
+{
+  "clusters": [
+    {
+      "id": "CL1",
+      "name": "Primary",
+      "host": "cucm1-pub.example.com",
+      "axl_version": "12.5",
+      "ca_bundle": ""
+    },
+    {
+      "id": "CL2",
+      "name": "Secondary",
+      "host": "cucm2-pub.example.com",
+      "axl_version": "14.0",
+      "ca_bundle": ""
+    },
+    {
+      "id": "CL3",
+      "name": "Regional",
+      "host": "",
+      "axl_version": "12.5",
+      "ca_bundle": ""
+    }
+  ],
+  "default_username": "",
+  "flag_overlaps": true,
+  "page_size": 2000,
+  "max_candidates": 100000,
+  "timeout_seconds": 60,
+  "axl_retry_attempts": 4,
+  "axl_retry_base_seconds": 2
+}

@@ -1,0 +1,20 @@
+# Your real cluster config (hosts/IPs) - never commit it
+cucm_clusters.json
+
+# Output the tools write next to themselves
+axl_diag_*.txt
+*.csv
+
+# Build artefacts
+build/
+dist/
+release/
+*.spec
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
