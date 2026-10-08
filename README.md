@@ -297,13 +297,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Security issues should be reported priva
 
 See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-## References
-
-- Cisco DevNet, **AXL Authentication**: https://developer.cisco.com/docs/axl/authentication/
-- Cisco, **Configure Partition and Calling Search Space**: https://www.cisco.com/c/en/us/support/docs/voice-unified-communications/unified-communications-manager-callmanager/22325-part-css-tn.html
-- Cisco DevNet, **Administrative XML Web Service (AXL)**: https://developer.cisco.com/docs/axl/
-- Cisco DevNet, **Cisco Code Exchange**: https://developer.cisco.com/codeexchange/
-
 ## License
 
 [MIT](LICENSE) © 2026 Ahmad Alkayyali
